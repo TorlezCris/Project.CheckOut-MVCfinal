@@ -1,0 +1,64 @@
+﻿@model Project.CheckOut_MVC.Model.ListOrderDetails
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p class="text-center alert-info">
+	Esto es una vista provisional para que el profesor identifique que se manejarán procesos
+	enseñados en clase, luego será recolocada en otra sección
+</p>
+
+
+<h3>
+	Número de Orden: @Model.OrderNumber
+</h3>
+
+<table class="table">
+	<tr>
+		<th>
+			Nombre del Producto
+		</th>
+		<th>
+			Descuento
+		</th>
+		<th>
+			Cantidad
+		</th>
+		<th>
+			Precio por Unidad
+		</th>
+	</tr>
+
+	@foreach (var item in Model.Details)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.ProductName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Discount)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Quantity)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Price)
+			</td>
+		</tr>
+	}
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+			Total a Pagar:
+		</td>
+		<td>
+			@Html.DisplayFor(model => model.TotalAmount)
+		</td>
+	</tr>
+</table>

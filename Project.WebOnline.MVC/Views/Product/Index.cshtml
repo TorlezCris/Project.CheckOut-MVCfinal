@@ -1,0 +1,61 @@
+﻿@model Project.WebOnline.MVC.Models.ProductViewModel
+@{
+	ViewBag.Title = "Product Page";
+}
+
+<!-- Page Content -->
+
+<form action="~/Store/Buy" method="get">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-8">
+				<div class="row">
+					<div class="col-lg-12 col-lg-offset-1 col-md-12 mb-4">
+						<div class="card h-100">
+							<a href="#"><img class="card-img-top" src="@Model.Image" alt=""></a>
+							<div class="card-body">
+								<h4 class="card-title">
+									<a href="#">@Model.Name</a>
+								</h4>
+								@Html.HiddenFor(model => Model.ProductId)
+								@Html.HiddenFor(model => Model.Name)
+								@Html.HiddenFor(model => Model.Price)
+								@Html.HiddenFor(model => Model.Color)
+								@Html.HiddenFor(model => Model.Description)
+								@Html.HiddenFor(model => Model.Image)
+								@Html.HiddenFor(model => Model.state)
+								<div class="input-group">
+									<div class="col-md-8">
+										<h4 class="card-title"><a href="#">Descripción del producto:</a></h4>
+										<p class="card-text">@Model.Description</p>
+									</div>
+									<div class="col-md-4">
+										<table>
+											<p class="card-text"><b>Precio: </b> S/ @Model.Price</p>
+											<p class="card-text"><b>Color: </b> @Model.Color</p>
+										</table>
+									</div>
+								</div>
+								@*<input type="text" value="1" name="id" readonly hidden />*@
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Pproduct View-->
+			<div class="col-lg-2">
+				<button class="btn btn-outline-warning" type="submit">
+					Comprar <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+				</button>
+				<br />
+				<br />
+				<p class="card-text">
+					<b>Cantidad: </b>
+					@Html.EditorFor(model => Model.Quantity)
+					@Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+				</p>
+			</div>
+		</div>
+	</div>
+</form>

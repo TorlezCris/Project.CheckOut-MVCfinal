@@ -1,0 +1,287 @@
+﻿@model Project.CheckOut.Models.TotalCart
+
+@{
+	ViewBag.Title = "Home Page";
+}
+<div class="jumbotron">
+	<div class="container">
+		<div class="row bs-wizard" style="border-bottom:0;">
+			<div class="container">
+				<div class="stepwizard">
+					<div class="stepwizard-row setup-panel">
+						<div class="stepwizard-step paso">
+							<a href="#VerifyEmail-step" type="button" class="btn btn-primary btn-circle" id="VerifyEmail-step-1">
+								<span class="glyphicon glyphicon-shopping-cart"></span>
+							</a>
+							<p>Verificar productos</p>
+						</div>
+						<div class="stepwizard-step paso">
+							<a href="#ProfileSetup-step" type="button" class="btn btn-success-2 btn-circle" disabled="disabled" display="block" id="ProfileSetup-step-2">
+								<span class="glyphicon glyphicon-credit-card"></span>
+							</a>
+							<p>Métodos de Pago</p>
+						</div>
+						@*<div class="stepwizard-step paso">
+								<a href="#Security-Setup-step" type="button" class="btn btn-success-3 btn-circle" disabled="disabled" display="block" id="Security-Setup-step-3">
+									<span class="glyphicon glyphicon-ok"></span>
+								</a>
+								<p>Orden Generada</p>
+							</div>*@
+					</div>
+				</div>
+				<form action="/Order/Create" method="post">
+					<div class="row setup-content" id="VerifyEmail-step">
+						<div class="col-xs-12">
+							<div class="col-md-12">
+								<br />
+								<div class="form-horizontal">
+									@*<form role="form">*@
+										<fieldset>
+											<p class="text-center alert-info">
+												Las vistas aún no tienen validaciones, se está mandando data en duro a modo de prueba.
+												Todos los flujos en el backend son completamente funcionales.
+											</p>
+											<div class="container mb-4">
+												<div class="row">
+													<div class="col-12">
+														<div class="table-responsive">
+															<table class="table table-striped">
+																<thead>
+																	<tr>
+																		<th scope="col"> </th>
+																		<th scope="col">Producto</th>
+																		<th scope="col">Habilitado</th>
+																		<th scope="col" class="text-center">Cantidad</th>
+																		<th scope="col" class="text-right">Precio</th>
+																		<th> </th>
+																	</tr>
+																</thead>
+																<tbody>
+																	@for(	int i= 0; i<Model.Cart.Count(); i++)
+																	{
+																	<tr>
+																		@Html.HiddenFor(model => model.Cart[i].Image)
+																		<td><img src="@Model.Cart[i].Image" /> </td>
+																		@Html.HiddenFor(model => model.Cart[i].ProductId)
+																		@Html.HiddenFor(model => model.Cart[i].ProductName)
+																		<td>@Model.Cart[i].ProductName</td>
+
+																		@Html.HiddenFor(model => model.Cart[i].IsAvailable)
+																		@if (!Model.Cart[i].IsAvailable)
+																		{
+																			<td>  Sin stock </td>
+																		}
+																		else
+																		{
+																			<td>  Con stock </td>
+																		}
+																		<td class="text-center">
+																			@*@Html.HiddenFor(model => model.Cart[i].Quantity)*@
+																			@*@Html.EditorFor(model => model.Cart[i].Quantity, new { htmlAttributes = new { @disabled = "disabled" } })*@
+																			@Html.EditorFor(model => model.Cart[i].Quantity)
+																			@*<input class="form-control" type="text" value="@Model.Cart[i].Quantity" disabled />*@
+																		</td>
+																		@Html.HiddenFor(model => model.Cart[i].Price)
+																		<td class="text-right">S/ @Html.ValueFor(model => model.Cart[i].Price)</td>
+																		<td class="text-right"><button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i> </button> </td>
+																	</tr>
+																	}
+																	@*@foreach (var item in Model.Cart)
+																	{
+																	<tr>
+																		<td><img src="~/Content/Images/@item.Image" /> </td>
+																		<td name="ProductId" hidden>@item.ProductId</td>
+																		<td name="ProductName">@item.ProductName</td>
+																		@if (item.IsAvailable)
+																		{
+																			<td name="IsAvailable">  Sin stock </td>
+																		}
+																		else
+																		{
+																			<td name="IsAvailable">  Con stock </td>
+																		}
+																		<td><input class="form-control" name = "Quantity" type="text" value="@item.Quantity" disabled /></td>
+																		<td name="Price" class="text-right">S/ @item.Price</td>
+																		<td class="text-right"><button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i> </button> </td>
+																	</tr>
+																	}
+																		<tr>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td>Sub-Total</td>
+																			<td name="totalAmount" class="text-right">@Model.TotalAmount</td>
+																		</tr>*@
+																		@*<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td class="text-right"></td>
+			</tr>*@
+																		<tr>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td><strong>Total</strong></td>
+																			@Html.HiddenFor(model => model.TotalAmount)
+																			<td class="text-right"><strong>S/ @Model.TotalAmount</strong></td>
+																		</tr>
+																	</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+									@*</form>*@
+								</div>
+								<div class="col-sm-12  col-md-6">
+									<button class="btn btn-block btn-light">Continuar Comprando</button>
+								</div>
+								<div class="col-sm-12 col-md-6 text-right">
+									<button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Siguiente</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row setup-content" id="ProfileSetup-step">
+						<div class="col-xs-12">
+							<div class="col-md-12">
+								<br />
+								<div class="form-horizontal">
+									@*<form action="/Order/Create" method="post">*@
+										<p class="text-center alert-info">
+											Las vistas aún no tienen validaciones, se está mandando data en duro a modo de prueba.
+											Todos los flujos en el backend son completamente funcionales.
+										</p>
+										<fieldset>
+											<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+											<div class="container">
+												<!-- col.// -->
+												<aside class="col-sm-3"></aside>
+												<aside class="col-sm-6">
+													<article class="payments">
+														<div class="card-body p-5">
+															<ul class="nav bg-light nav-pills rounded nav-fill mb-3" role="tablist">
+																<li class="nav-item active">
+																	<a class="nav-link active" data-toggle="pill" href="#nav-tab-card">
+																		<i class="fa fa-credit-card"></i> Tarjeta de Crédito
+																	</a>
+																</li>
+															</ul>
+															<div class="tab-content">
+																<div class="tab-pane fade show active in" id="nav-tab-card">
+																	@*<p class="alert alert-success">Texto exitoso o de error</p>*@
+																		<div class="legend form-group">
+																			<label for="username">Nombre Completo</label>
+																				@Html.TextBoxFor(model => model.PaymentData.TitularName, new { @class = "form-control", @placeholder = "Nombre", @required="" })
+																			@*<input type="text" class="form-control" name="username" placeholder="Nombre" required="">*@
+																		</div> <!-- form-group.// -->
+																		<div class="form-group">
+																			<label for="cardNumber">Número de Tarjeta</label>
+																			<div class="input-group">
+																				@Html.TextBoxFor(model => model.PaymentData.CardNumber, new { @class = "form-control", @placeholder = "4567 1234 5656 8989", @required = "", @maxlength = "16" })
+																				@*<input type="text" class="form-control" name="cardNumber" placeholder="4567 1234 5656 8989" maxlength="16" min="16">*@
+																				<div class="input-group-append">
+																					<span class="input-group-text text-muted">
+																						<i class="fab fa-cc-mastercard"></i> <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-amex"></i>
+																					</span>
+																				</div>
+																			</div>
+																		</div> <!-- form-group.// -->
+																		<div class="row">
+																			<div class="col-sm-8">
+																				<div class="form-group">
+																					<label><span class="hidden-xs">Expiración</span> </label>
+																					<div class="input-group">
+																						@Html.TextBoxFor(model => model.PaymentData.Month, new { @class = "form-control", @placeholder = "MM", @type = "number", @required = "", @maxlength = "2" })
+																						@Html.TextBoxFor(model => model.PaymentData.Year, new { @class = "form-control", @placeholder = "YY", @type = "number", @required = "", @maxlength = "2" })
+																						@*<input type="number" class="form-control" placeholder="MM" name="" maxlength="2" required>
+																						<input type="number" class="form-control" placeholder="YY" name="" maxlength="2" required>*@
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-sm-4">
+																				<div class="form-group">
+																					<label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
+																					@Html.TextBoxFor(model => model.PaymentData.CVV, new { @class = "form-control", @placeholder = "cvv", @type = "number", @required = "", @maxlength = "2" })
+																					@*<input type="number" class="form-control" required="">*@
+																				</div> <!-- form-group.// -->
+																			</div>
+																		</div> <!-- row.// -->
+																		@*<button class="subscribe btn btn-primary btn-block" type="button"> Confirmar  </button>*@
+																</div> <!-- tab-pane.// -->
+															</div> <!-- tab-content .// -->
+														</div> <!-- card-body.// -->
+													</article> <!-- card.// -->
+
+												</aside> <!-- col.// -->
+											</div> <!-- row.// -->
+											<!--container end.//-->
+										</fieldset>
+										<div class="form-horizontal">
+											<div class="form-group">
+												<div class="col-md-12">
+													<input type="number" name="ProductID" value="1" hidden />
+													<input type="number" name="Quantity" value="3" hidden />
+													<input type="text" name="Precio" value="228.80" hidden />
+													<input type="submit" value="Comprar" class="btn btn-primary nextBtn btn-lg pull-right" />
+												</div>
+											</div>
+										</div>
+									@*</form>*@
+								</div>
+								@*@using (Html.BeginForm("Create", "Order", FormMethod.Post))
+									{
+											@Html.AntiForgeryToken()
+											@Html.ValidationSummary(true)
+											<div class="form-horizontal">
+													<div class="form-group">
+														<div class="col-md-12">
+															<input type="number" id="ProductID" name="ProductID" value="1" hidden />
+															<input type="number" id="Quantity" name="Quantity" value="3" hidden />
+															<input type="text" id="ProductID" name="Precio" value="228.80" hidden />
+															<input type="submit" value="Comprar" class="btn btn-primary nextBtn btn-lg pull-right" />
+														</div>
+													</div>
+											</div>
+									}*@
+							</div>
+						</div>
+					</div>
+					@*<div class="row setup-content" id="Security-Setup-step">
+							<div class="col-xs-12">
+								<div class="col-md-12">
+									<b>Gracias por Comprar</b>
+
+									<div class="form-horizontal">
+										<form role="form">
+											<fieldset>
+												<br />
+												<div class="form-group">
+													<label class="col-sm-3 control-label" for="card-holder-name">Tu orden es:</label>
+													<div class="col-sm-9">
+															<th>
+																	@Html.DisplayNameFor(model => model.OrderNumber)
+															</th>
+													</div>
+												</div>
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>*@
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+
+</div>

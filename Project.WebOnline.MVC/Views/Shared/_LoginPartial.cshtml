@@ -1,0 +1,50 @@
+﻿@if (Request.IsAuthenticated)
+{
+    using(Html.BeginForm("Logout","Account",FormMethod.Post,
+        new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @*@Html.AntiForgeryToken()*@
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+						<ul class="navbar-nav ml-auto">
+								<li class="nav-item">
+									<a href="~/Store/Buy" class="nav-link">
+										Carrito<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="~/SaleOrder/Index" class="nav-link">Mis Pedidos</a>
+								</li>
+								<li class="nav-item">
+									<a href="~/Store/Index" class="nav-link">Hola @User.Identity.Name</a>
+								</li>
+								<li class="nav-item">
+										<a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log Out</a>
+								</li>
+						</ul>
+				</div>
+    }
+}
+else
+		{
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+						<ul class="navbar-nav ml-auto">
+								<li class="nav-item">
+										@*<a tabindex="0" class="btn btn-group-justified alert-success" role="button" id="login" data-placement="bottom" data-toggle="popover" data-trigger="focus">
+												<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+												Mi cuenta
+										</a>*@
+										<a href="~/Account/Login" tabindex="0" class="btn btn-group-justified alert-success" role="button">
+												<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+												Mi cuenta
+										</a>
+								</li>
+								<li class="nav-item">
+										<a href="~/Account/Register" tabindex="0" class="btn btn-group-justified alert-success" role="button">
+												<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+												Regístrate
+										</a>
+								</li>
+							</ul>
+				</div>
+		}
+

@@ -1,0 +1,33 @@
+﻿@model Project.CheckOut.Models.Order
+
+@{
+	ViewBag.Title = "Order Page";
+}
+<div class="jumbotron">
+	<div class="container">
+		<div class="row bs-wizard" style="border-bottom:0;">
+			<div class="container">
+
+				<div class="stepwizard">
+					<div class="stepwizard-row setup-panel">
+						<div class="stepwizard-step paso">
+							<a href="#VerifyEmail-step" type="button" class="btn btn-success btn-circle" id="VerifyEmail-step-1">
+								<span class="fa fa-check"></span>
+							</a>
+							<p>Verificar productos</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<p class="text-center">
+							<b class="text-center">Gracias por Comprar!!</b> Tu orden es: @Model.OrderNumber
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

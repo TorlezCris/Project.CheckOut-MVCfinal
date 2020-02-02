@@ -1,0 +1,53 @@
+﻿@model Project.CheckOut.Models.TotalCart
+
+
+<h3>
+	Número de Orden: @Model.OrderNumber
+</h3>
+
+<div class="form-horizontal">
+	<table class="table">
+		<tr>
+			<th>
+				Nombre del Producto
+			</th>
+			<th>
+				Descuento
+			</th>
+			<th>
+				Cantidad
+			</th>
+			<th>
+				Precio por Unidad
+			</th>
+		</tr>
+
+		@foreach (var item in Model.Cart)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Discount)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Quantity)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Price)
+				</td>
+			</tr>
+		}
+		<tr>
+			<td></td>
+			<td></td>
+			<td>
+				Total pagado:
+			</td>
+			<td>
+				@Html.DisplayFor(model => model.TotalAmount)
+			</td>
+		</tr>
+	</table>
+	</div>
